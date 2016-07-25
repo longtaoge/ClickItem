@@ -12,7 +12,7 @@ import com.orhanobut.hawk.Hawk;
 public class GlideUtils {
 
 
-   // public static String slipTag = "\\?";
+    // public static String slipTag = "\\?";
 
     public static String slipTag = "it";
 
@@ -23,15 +23,16 @@ public class GlideUtils {
             String[] urls = url.split(slipTag);
             if (urls.length > 1) {
 
-                if (Hawk.get(getCacheUrl(url)) == null) {
+                if (Hawk.get(getCacheUrl(url)) == null) {//用图片URL固定的部分获取第一次缓存图片时的全URL
 
-                  Hawk.put(getCacheUrl(url), url);
-
+                    Hawk.put(getCacheUrl(url), url); //如果没有缓存过，将第图片第一次加载时的URL缓存起来
+                   //第一次加载用全路径从网络上加载
                     Glide.with(context)
                             .load(url)
                             .into(imageView);
-                } else {
 
+                } else {
+                    //第二次以后能过 url 加载本地缓存图片
                     Glide.with(context)
                             .load(Hawk.get(getCacheUrl(url)))
                             .into(imageView);
@@ -39,7 +40,7 @@ public class GlideUtils {
 
 
             } else {
-
+                 //如果非动态URL 则直接加载即可
                 Glide.with(context)
                         .load(url)
                         .into(imageView);
@@ -49,11 +50,6 @@ public class GlideUtils {
 
 
     }
-
-
-
-
-
 
 
     public static String getCacheUrl(String url) {
