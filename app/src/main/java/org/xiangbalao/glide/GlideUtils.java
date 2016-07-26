@@ -12,7 +12,7 @@ import com.orhanobut.hawk.Hawk;
 public class GlideUtils {
 
 
-    // public static String slipTag = "\\?";
+    // public static String slipTag = "\\?";  //加载七牛时用本分隔符
 
     public static String slipTag = "it";
 
