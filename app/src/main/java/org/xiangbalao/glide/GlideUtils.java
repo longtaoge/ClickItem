@@ -43,7 +43,7 @@ public class GlideUtils {
                             .listener(new RequestListener<String, GlideDrawable>() {
                                 @Override
                                 public boolean onException(Exception e, String model, Target<GlideDrawable> target, boolean isFirstResource) {
-                                    Hawk.put(getCacheUrl(url), url); //更新缓存
+                                   
                                     Glide.with(context)
                                             .load(url)
                                             .into(imageView);
@@ -52,6 +52,7 @@ public class GlideUtils {
 
                                 @Override
                                 public boolean onResourceReady(GlideDrawable resource, String model, Target<GlideDrawable> target, boolean isFromMemoryCache, boolean isFirstResource) {
+                                     Hawk.put(getCacheUrl(url), url); //更新缓存
                                     return false;
                                 }
                             })
